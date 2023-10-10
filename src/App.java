@@ -45,7 +45,7 @@ public class App {
         System.out.println(String.format("zoom = %d", zoom));
 
         LatLon latLonLT = new LatLon(-33.361437897206116, 150.56579437671328);//coordinate on left top side of paper map
-        createTiles(paperMap2DigitalMap(zoom, latLonLT, "paperMap.png"), 
+        createTiles(paperMap2DigitalMap(zoom, latLonLT, "PaperMap.png"), 
                     zoom, latLonLT);
 
         System.out.println("<<< end");
