@@ -24,7 +24,7 @@ The following image is zoom level
 ![image](https://github.com/kachuu/OfflineMaps/blob/main/ZoomLevel.png)  
   
 The following image is original paper map  
-![image](https://github.com/kachuu/OfflineMaps/blob/main/src/PaperMap.jpeg)  
+![image](https://github.com/kachuu/OfflineMaps/blob/main/PaperMap.jpeg)  
   
 The following image is adjusted paper map  
 The red area indicates the areas that need adjustment. The paper map needs to be shifted to the right and down in order to align perfectly with the digital map, and the map needs to be slightly enlarged for further processing.  
