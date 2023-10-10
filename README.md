@@ -9,7 +9,7 @@
   
 The following image is from zoom level = **17**, tileX = **120549**, tileY = **78695**.  
 Save format is **17/120549/78695.png**  
-![image]https://github.com/kachuu/OfflineMaps/blob/main/bin/17/120549/78695.png  
+![image](https://github.com/kachuu/OfflineMaps/blob/main/bin/17/120549/78695.png)  
   
 ### Create map tiles using paper map  
 1. Convert the scale of a paper map to a zoom level.  
@@ -21,16 +21,16 @@ Save format is **17/120549/78695.png**
 7. Save the map tiles in the format z/x/y.png. This is the data source format for offline map tools.  
   
 The following image is zoom level  
-![image]https://github.com/kachuu/OfflineMaps/blob/main/ZoomLevel.png  
+![image](https://github.com/kachuu/OfflineMaps/blob/main/ZoomLevel.png)  
   
 The following image is original paper map  
-![image]https://github.com/kachuu/OfflineMaps/blob/main/src/PaperMap.jpeg  
+![image](https://github.com/kachuu/OfflineMaps/blob/main/src/PaperMap.jpeg)  
   
 The following image is adjusted paper map  
 The red area indicates the areas that need adjustment. The paper map needs to be shifted to the right and down in order to align perfectly with the digital map, and the map needs to be slightly enlarged for further processing.  
-![image]https://github.com/kachuu/OfflineMaps/blob/main/bin/Test.png  
+![image](https://github.com/kachuu/OfflineMaps/blob/main/bin/Test.png)  
   
 The following image is from paper map, zoom level = **12**, tileX = **3771**, tileY = **2460**.  
 Save format is **12/3771/2460.png**  
-![image]https://github.com/kachuu/OfflineMaps/blob/main/bin/12/3771/2460.png  
+![image](https://github.com/kachuu/OfflineMaps/blob/main/bin/12/3771/2460.png)  
   
