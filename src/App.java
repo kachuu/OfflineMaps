@@ -5,31 +5,76 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.net.URL;
-
+import java.text.NumberFormat;
 import javax.imageio.ImageIO;
 
 public class App {
     public static void main(String[] args) throws Exception {
         App app = new App();
-        // app.test1();
-        app.test2();
+        if (0 < args.length && args[0].equals("-web") && 4 == args.length) {
+            String[] latlon1 = args[2].split(",");
+            String[] latlon2 = args[3].split(",");
+            if (2 != latlon1.length || 2 != latlon2.length) {
+                app.cmdLineParam();
+                return;
+            }
+
+            app.cmdLine1(NumberFormat.getInstance().parse(args[1]).intValue(), 
+                         app.new LatLon(NumberFormat.getInstance().parse(latlon1[0]).doubleValue(), 
+                                        NumberFormat.getInstance().parse(latlon1[1]).doubleValue()),
+                         app.new LatLon(NumberFormat.getInstance().parse(latlon2[0]).doubleValue(), 
+                                        NumberFormat.getInstance().parse(latlon2[1]).doubleValue()));
+        } else
+        if (0 < args.length && args[0].equals("-paper") && 4 == args.length) {
+            String[] latlon = args[3].split(",");
+            if (2 != latlon.length) {
+                app.cmdLineParam();
+                return;
+            }
+
+            app.cmdLine2(args[1],
+                         NumberFormat.getInstance().parse(args[2]).intValue(), 
+                         app.new LatLon(NumberFormat.getInstance().parse(latlon[0]).doubleValue(), 
+                                        NumberFormat.getInstance().parse(latlon[1]).doubleValue()));
+        } else app.cmdLineParam();
     }
 
-    public void test1() {
+    public void cmdLineParam() {
+        System.out.println(
+        "\n" + 
+        "Command line parameters\n" +
+        "\n" +
+        "Download map tiles for network\n" +
+        "  -web z lat1,lon1 lat2,lon2\n" +
+        "            z ........ zoom level\n" +
+        "            lat1 ..... Latitude of the top-left corner of the rectangle\n" +
+        "            lon1 ..... Longitude of the top-left corner of the rectangle\n" +
+        "            lat2 ..... Latitude of the bottom-right corner of the rectangle\n" +
+        "            lon2 ..... Longitude of the bottom-right corner of the rectangle\n" +
+        "\n" +
+        "Create map tiles for paper map\n" +
+        "  -paper f s lat,lon\n" +
+        "            f ........ paper map file. e.g. full file path\n" +
+        "            s ........ paper map scale\n" +
+        "            lat ...... Latitude of the top-left side of paper map\n" +
+        "            lon ...... Longitude of the top-left side of paper map\n" +
+        "\n");
+    }
+
+    //zoom: zoom level of digital map
+    //latLonTL: top-left coordinate of rectangle on digital map
+    //latLonBR: bottom-right coordinate of rectangle on digital map
+    public void cmdLine1(int zoom, LatLon latLonTL, LatLon latLonBR) {
         System.out.println(">>> download map tiles for network");
 
-        LatLon latLonLT = new LatLon(-33.959591878069034, 151.09710802548128);//left top coordinate of rectangle on digital map
-        LatLon latLonRB = new LatLon(-33.970459461303896, 151.11512819536605);//right bottom coordinate of rectangle on digital map
-        int zoom = 17;//zoom level of digital map
+        Point tileCoordTL = worldCoord2TileCoord(zoom, latLon2WorldCoord(latLonTL));
+        System.out.println(String.format("zoom = %d, t/l tile coordinate(%d, %d)", zoom, tileCoordTL.x, tileCoordTL.y));
 
-        Point tileCoordLT = worldCoord2TileCoord(zoom, latLon2WorldCoord(latLonLT));
-        System.out.println(String.format("zoom = %d, l/t tile coordinate(%d, %d)", zoom, tileCoordLT.x, tileCoordLT.y));
+        Point tileCoordBR = worldCoord2TileCoord(zoom, latLon2WorldCoord(latLonBR));
+        System.out.println(String.format("zoom = %d, b/r tile coordinate(%d, %d)", zoom, tileCoordBR.x, tileCoordBR.y));
 
-        Point tileCoordRB = worldCoord2TileCoord(zoom, latLon2WorldCoord(latLonRB));
-        System.out.println(String.format("zoom = %d, r/b tile coordinate(%d, %d)", zoom, tileCoordRB.x, tileCoordRB.y));
-
-        for (int x = tileCoordLT.x; x <= tileCoordRB.x; ++x) {
-            for (int y = tileCoordLT.y; y <= tileCoordRB.y; ++y) {
+        for (int x = tileCoordTL.x; x <= tileCoordBR.x; ++x) {
+            for (int y = tileCoordTL.y; y <= tileCoordBR.y; ++y) {
                 downloadTiles(zoom, x, y);//download according to storage rules of digital map
             } 
         }
@@ -37,16 +82,17 @@ public class App {
         System.out.println("<<< end");
     }
 
-    public void test2() {
+    //mapFile: paper map file. e.g. full file path
+    //scale: paper map scale
+    //latLonTL: coordinate on top-left side of paper map
+    public void cmdLine2(String mapFile, int scale, LatLon latLonTL) {
         System.out.println(">>> create map tiles for paper map");
 
-        double scale = 110000;//paper map scale
         int zoom = (int)Math.round(Math.log(591657527.591555 / scale) / Math.log(2));
         System.out.println(String.format("zoom = %d", zoom));
 
-        LatLon latLonLT = new LatLon(-33.361437897206116, 150.56579437671328);//coordinate on left top side of paper map
-        createTiles(paperMap2DigitalMap(zoom, latLonLT, "PaperMap.png"), 
-                    zoom, latLonLT);
+        createTiles(paperMap2DigitalMap(mapFile, zoom, latLonTL), 
+                    zoom, latLonTL);
 
         System.out.println("<<< end");
     }
@@ -77,12 +123,12 @@ public class App {
         }
     }
 
-    public BufferedImage paperMap2DigitalMap(int zoom, LatLon latLon, String mapFile) {
+    public BufferedImage paperMap2DigitalMap(String mapFile, int zoom, LatLon latLon) {
         try {
             LatLon latLonOrg = tileCoord2LatLon(zoom, worldCoord2TileCoord(zoom, latLon2WorldCoord(latLon)));
-            Point pxCoordLT = worldCoord2PixelCoord(zoom, latLon2WorldCoord(latLon));
+            Point pxCoordTL = worldCoord2PixelCoord(zoom, latLon2WorldCoord(latLon));
             Point pxCoordOrg = worldCoord2PixelCoord(zoom, latLon2WorldCoord(latLonOrg));
-            Point pxDiff = new Point(pxCoordLT.x - pxCoordOrg.x, pxCoordLT.y - pxCoordOrg.y);
+            Point pxDiff = new Point(pxCoordTL.x - pxCoordOrg.x, pxCoordTL.y - pxCoordOrg.y);
             System.out.println(String.format("diff px x = %d, y = %d", pxDiff.x, pxDiff.y));//offset of paper map on digital map
             
             BufferedImage orgMap = ImageIO.read(new File(mapFile));
