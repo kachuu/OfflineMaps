@@ -1,6 +1,28 @@
 # OfflineMaps  
  Download map tiles from internet, create map tiles using paper map  
   
+### Command line  
+Download map tiles for network  
+  -web z lat1,lon1 lat2,lon2  
+            z ........ zoom level  
+            lat1 ..... Latitude of the top-left corner of the rectangle  
+            lon1 ..... Longitude of the top-left corner of the rectangle  
+            lat2 ..... Latitude of the bottom-right corner of the rectangle  
+            lon2 ..... Longitude of the bottom-right corner of the rectangle  
+  
+Create map tiles for paper map  
+  -paper f s lat,lon  
+            f ........ paper map file. e.g. full file path  
+            s ........ paper map scale  
+            lat ...... Latitude of the top-left side of paper map  
+            lon ...... Longitude of the top-left side of paper map  
+  
+**Download cmd**  
+_java App -web 17 -33.959591878069034,151.09710802548128 -33.970459461303896,151.11512819536605_  
+  
+**Create cmd**  
+_java App -paper PaperMap.png 110000 -33.361437897206116,150.56579437671328_  
+  
 ### Download map tiles from the internet:  
 1. Determine the latitude and longitude of the top-left and bottom-right corners of the map rectangular area.  
 2. Convert the latitude and longitude into map tile indices based on the map's zoom level.  
