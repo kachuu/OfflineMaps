@@ -3,19 +3,19 @@
   
 ### Command line  
 Download map tiles for network  
-  -web z lat1,lon1 lat2,lon2  
-            z ........ zoom level  
-            lat1 ..... Latitude of the top-left corner of the rectangle  
-            lon1 ..... Longitude of the top-left corner of the rectangle  
-            lat2 ..... Latitude of the bottom-right corner of the rectangle  
-            lon2 ..... Longitude of the bottom-right corner of the rectangle  
+&nbsp;&nbsp;-web z lat1,lon1 lat2,lon2  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;z ........ zoom level  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lat1 ..... Latitude of the top-left corner of the rectangle  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lon1 ..... Longitude of the top-left corner of the rectangle  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lat2 ..... Latitude of the bottom-right corner of the rectangle  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lon2 ..... Longitude of the bottom-right corner of the rectangle  
   
 Create map tiles for paper map  
-  -paper f s lat,lon  
-            f ........ paper map file. e.g. full file path  
-            s ........ paper map scale  
-            lat ...... Latitude of the top-left side of paper map  
-            lon ...... Longitude of the top-left side of paper map  
+&nbsp;&nbsp;-paper f s lat,lon  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f ........ paper map file. e.g. full file path  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s ........ paper map scale  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lat ...... Latitude of the top-left side of paper map  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lon ...... Longitude of the top-left side of paper map  
   
 **Download cmd**  
 _java App -web 17 -33.959591878069034,151.09710802548128 -33.970459461303896,151.11512819536605_  
