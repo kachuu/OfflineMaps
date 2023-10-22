@@ -2,6 +2,7 @@
  Download map tiles from internet, create map tiles using paper map  
   
 ### Command line  
+```bash  
 Download map tiles for network  
 &nbsp;&nbsp;-web z lat1,lon1 lat2,lon2  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;z ........ zoom level  
@@ -16,12 +17,17 @@ Create map tiles for paper map
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s ........ paper map scale  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lat ...... Latitude of the top-left side of paper map  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lon ...... Longitude of the top-left side of paper map  
+```  
   
 **Download cmd**  
-_java App -web 17 -33.959591878069034,151.09710802548128 -33.970459461303896,151.11512819536605_  
+```bash  
+java App -web 17 -33.959591878069034,151.09710802548128 -33.970459461303896,151.11512819536605  
+```  
   
 **Create cmd**  
-_java App -paper PaperMap.png 110000 -33.361437897206116,150.56579437671328_  
+```bash  
+java App -paper PaperMap.png 110000 -33.361437897206116,150.56579437671328  
+```  
   
 ### Download map tiles from the internet:  
 1. Determine the latitude and longitude of the top-left and bottom-right corners of the map rectangular area.  
