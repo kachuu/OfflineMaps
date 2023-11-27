@@ -1,0 +1,13 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "App",
+            "projectName": "offlineMaps_27794553",
+            // "args": "-web 17 -33.959591878069034,151.09710802548128 -33.970459461303896,151.11512819536605",
+            "args": "-paper PaperMap.png 110000 -33.361437897206116,150.56579437671328",
+        }
+    ]
+}
