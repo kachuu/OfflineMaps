@@ -46,7 +46,7 @@ Convert the scale of a paper map to the zoom level of a digital map.
 int zoom = (int)Math.round(Math.log(591657527.591555 / scale) / Math.log(2));
 ```  
   
-The image is zoom level.  
+The image is relationship between *zoom* and *scale*.  
 ![image](https://github.com/kachuu/OfflineMaps/blob/main/ZoomLevel.png)  
   
 Convert a paper map into a digital map. Since the top left corner of the paper map may not coincide with the tile, it is necessary to slightly shift the paper map for correction. The calculation here requires the use of the *zoom* variable.  
@@ -59,8 +59,8 @@ Now, having obtained the coordinates corresponding to the top-left corner of the
 OfflineMap.createTiles(newMapFile, zoom, latLonTL)
 ```  
   
-### Run  
-Command line  
+## Run  
+### Command line  
 ```bash  
 Download map tiles for network  
   -web z lat1,lon1 lat2,lon2  
@@ -78,7 +78,7 @@ Create map tiles for paper map
             lon ...... Longitude of the top-left side of paper map  
 ```  
   
-Get offline maps from the internet.  
+### Get offline maps from the internet  
 ```bash  
 java App -web 17 -33.959591878069034,151.09710802548128 -33.970459461303896,151.11512819536605
 ```  
@@ -86,7 +86,7 @@ java App -web 17 -33.959591878069034,151.09710802548128 -33.970459461303896,151.
 The image is from zoom level = 17, tileX = 120549, tileY = 78695. Save format is 17/120549/78695.png  
 ![image](https://github.com/kachuu/OfflineMaps/blob/main/bin/17/120549/78695.png)  
   
-Get offline maps from a paper map  
+### Get offline maps from a paper map  
 ```bash  
 java App -paper PaperMap.png 110000 -33.361437897206116,150.56579437671328
 ```  
